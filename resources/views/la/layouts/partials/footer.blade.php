@@ -1,8 +1,8 @@
 @if(!isset($no_padding))
 <footer class="main-footer">
     <div class="pull-right hidden-xs">
-        Powered by <a href="#">Portal Rugby </a>
+        Powered by <a href="http://dwijitsolutions.com">Portal Rugby</a>
     </div>
-    <strong>Copyright &copy; 2018 - Perú
+    <strong>Copyright &copy; 2016
 </footer>
 @endif

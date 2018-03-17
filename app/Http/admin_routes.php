@@ -71,11 +71,29 @@ Route::group(['as' => $as, 'middleware' => ['auth', 'permission:ADMIN_PANEL']], 
 	Route::post(config('laraadmin.adminRoute') . '/create_backup_ajax', 'LA\BackupsController@create_backup_ajax');
 	Route::get(config('laraadmin.adminRoute') . '/downloadBackup/{id}', 'LA\BackupsController@downloadBackup');
 
-	/* ================== Users ================== */
-	Route::resource(config('laraadmin.adminRoute') . '/estadios', 'LA\EstadiosController');
-	Route::get(config('laraadmin.adminRoute') . '/estadio_dt_ajax', 'LA\EstadiosController@dtajax');
-
 	/* ================== Arbitros ================== */
 	Route::resource(config('laraadmin.adminRoute') . '/arbitros', 'LA\ArbitrosController');
 	Route::get(config('laraadmin.adminRoute') . '/arbitro_dt_ajax', 'LA\ArbitrosController@dtajax');
+
+
+	/* ================== Accions ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/accions', 'LA\AccionsController');
+	Route::get(config('laraadmin.adminRoute') . '/accion_dt_ajax', 'LA\AccionsController@dtajax');
+
+	/* ================== Equipos ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/equipos', 'LA\EquiposController');
+	Route::get(config('laraadmin.adminRoute') . '/equipo_dt_ajax', 'LA\EquiposController@dtajax');
+
+
+	/* ================== Jugadors ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/jugadors', 'LA\JugadorsController');
+	Route::get(config('laraadmin.adminRoute') . '/jugador_dt_ajax', 'LA\JugadorsController@dtajax');
+
+	/* ================== Catalogos ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/catalogos', 'LA\CatalogosController');
+	Route::get(config('laraadmin.adminRoute') . '/catalogo_dt_ajax', 'LA\CatalogosController@dtajax');
+
+	/* ================== Catalogo_Detalles ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/catalogo_detalles', 'LA\Catalogo_DetallesController');
+	Route::get(config('laraadmin.adminRoute') . '/catalogo_detalle_dt_ajax', 'LA\Catalogo_DetallesController@dtajax');
 });
