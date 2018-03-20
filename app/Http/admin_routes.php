@@ -104,4 +104,8 @@ Route::group(['as' => $as, 'middleware' => ['auth', 'permission:ADMIN_PANEL']], 
 	/* ================== PlantillaJugadors ================== */
 	Route::resource(config('laraadmin.adminRoute') . '/plantillajugadors', 'LA\PlantillaJugadorsController');
 	Route::get(config('laraadmin.adminRoute') . '/plantillajugador_dt_ajax', 'LA\PlantillaJugadorsController@dtajax');
+
+	/* ================== Estadios ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/estadios', 'LA\EstadiosController');
+	Route::get(config('laraadmin.adminRoute') . '/estadio_dt_ajax', 'LA\EstadiosController@dtajax');
 });

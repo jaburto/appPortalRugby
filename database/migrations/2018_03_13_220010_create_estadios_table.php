@@ -17,8 +17,11 @@ class CreateEstadiosTable extends Migration
      */
     public function up()
     {
-        Module::generate("Estadios", 'estadios', 'name', 'fa-cube', [
-            ["name", "Nombre", "String", false, "", 0, 256, false],
+        Module::generate("Estadios", 'estadios', 'desnombre', 'fa-file-powerpoint-o', [
+            ["desnombre", "Nombre", "String", false, "", 0, 256, true],
+            ["desubicacion", "Ubicacion", "Address", false, "", 0, 256, false],
+            ["valpais", "Pais", "Dropdown", false, "Perú", 0, 0, false, ["Per\u00fa","Argentina","Chile","Paraguay"]],
+            ["isactive", "Activo / Inactivo", "Checkbox", false, "1", 0, 0, true],
         ]);
 		
 		/*

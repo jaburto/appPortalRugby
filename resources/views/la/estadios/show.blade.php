@@ -107,7 +107,10 @@
 						<h4>General Info</h4>
 					</div>
 					<div class="panel-body">
-						@la_display($module, 'name')
+						@la_display($module, 'desnombre')
+						@la_display($module, 'desubicacion')
+						@la_display($module, 'valpais')
+						@la_display($module, 'isactive')
 					</div>
 				</div>
 			</div>

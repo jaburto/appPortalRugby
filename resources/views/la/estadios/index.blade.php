@@ -59,7 +59,10 @@
                     @la_form($module)
 					
 					{{--
-					@la_input($module, 'name')
+					@la_input($module, 'desnombre')
+					@la_input($module, 'desubicacion')
+					@la_input($module, 'valpais')
+					@la_input($module, 'isactive')
 					--}}
 				</div>
 			</div>

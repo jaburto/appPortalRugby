@@ -22,8 +22,8 @@ use App\Models\Estadio;
 class EstadiosController extends Controller
 {
 	public $show_action = true;
-	public $view_col = 'name';
-	public $listing_cols = ['id', 'name'];
+	public $view_col = 'desnombre';
+	public $listing_cols = ['id', 'desnombre', 'desubicacion', 'valpais', 'isactive'];
 	
 	public function __construct() {
 		// Field Access of Listing Columns
