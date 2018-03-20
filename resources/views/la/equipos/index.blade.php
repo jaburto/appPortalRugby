@@ -1,14 +1,14 @@
 @extends("la.layouts.app")
 
-@section("contentheader_title", "Departments")
-@section("contentheader_description", "Departments listing")
-@section("section", "Departments")
+@section("contentheader_title", "Equipos")
+@section("contentheader_description", "Equipos listing")
+@section("section", "Equipos")
 @section("sub_section", "Listing")
-@section("htmlheader_title", "Departments Listing")
+@section("htmlheader_title", "Equipos Listing")
 
 @section("headerElems")
-@la_access("Departments", "create")
-	<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Add Department</button>
+@la_access("Equipos", "create")
+	<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Add Equipo</button>
 @endla_access
 @endsection
 
@@ -39,30 +39,37 @@
 		</tr>
 		</thead>
 		<tbody>
-			
+
 		</tbody>
 		</table>
 	</div>
 </div>
 
-@la_access("Departments", "create")
+@la_access("Equipos", "create")
 <div class="modal fade" id="AddModal" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Add Department</h4>
+				<h4 class="modal-title" id="myModalLabel">Add Equipo</h4>
 			</div>
-			{!! Form::open(['action' => 'LA\DepartmentsController@store', 'id' => 'department-add-form']) !!}
+			{!! Form::open(['action' => 'LA\EquiposController@store', 'id' => 'equipo-add-form']) !!}
 			<div class="modal-body">
 				<div class="box-body">
                     @la_form($module)
-					
+
 					{{--
-					@la_input($module, 'name')
-					@la_input($module, 'tags')
-					@la_input($module, 'color')
-					@la_input($module, 'id_app_equipo')
+					@la_input($module, 'desnombre')
+					@la_input($module, 'desnombrefemenino')
+					@la_input($module, 'desnombrecomercial')
+					@la_input($module, 'imglogo')
+					@la_input($module, 'imgbanner')
+					@la_input($module, 'desentrenamiento')
+					@la_input($module, 'deshorario')
+					@la_input($module, 'descontacto')
+					@la_input($module, 'deswebsite')
+					@la_input($module, 'desfacebook')
+					@la_input($module, 'isactive')
 					--}}
 				</div>
 			</div>
@@ -89,7 +96,7 @@ $(function () {
 	$("#example1").DataTable({
 		processing: true,
         serverSide: true,
-        ajax: "{{ url(config('laraadmin.adminRoute') . '/department_dt_ajax') }}",
+        ajax: "{{ url(config('laraadmin.adminRoute') . '/equipo_dt_ajax') }}",
 		language: {
 			lengthMenu: "_MENU_",
 			search: "_INPUT_",
@@ -99,8 +106,8 @@ $(function () {
 		columnDefs: [ { orderable: false, targets: [-1] }],
 		@endif
 	});
-	$("#department-add-form").validate({
-		
+	$("#equipo-add-form").validate({
+
 	});
 });
 </script>

@@ -8,7 +8,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Dwij\Laraadmin\Models\Module;
 
-class CreateDepartmentsTable extends Migration
+class CreatePlantillasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,11 +17,11 @@ class CreateDepartmentsTable extends Migration
      */
     public function up()
     {
-        Module::generate("Departments", 'departments', 'name', 'fa-tags', [
-            ["name", "Name", "Name", true, "", 1, 250, true],
-            ["tags", "Tags", "Taginput", false, [], 0, 0, false],
-            ["color", "Color", "String", false, "", 0, 50, true],
+        Module::generate("Plantillas", 'plantillas', 'desnombre', 'fa-group', [
             ["id_app_equipo", "Equipo", "Dropdown", false, "", 0, 0, false, "@equipos"],
+            ["desnombre", "Nombre", "String", false, "", 0, 256, true],
+            ["numperiodo", "Periodo", "Integer", false, "", 0, 11, true],
+            ["isactive", "Activo / Inactivo", "Checkbox", false, "1", 0, 0, true],
         ]);
 		
 		/*
@@ -67,8 +67,8 @@ class CreateDepartmentsTable extends Migration
      */
     public function down()
     {
-        if (Schema::hasTable('departments')) {
-            Schema::drop('departments');
+        if (Schema::hasTable('plantillas')) {
+            Schema::drop('plantillas');
         }
     }
 }

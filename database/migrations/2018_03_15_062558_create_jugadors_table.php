@@ -8,7 +8,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Dwij\Laraadmin\Models\Module;
 
-class CreateDepartmentsTable extends Migration
+class CreateJugadorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,11 +17,18 @@ class CreateDepartmentsTable extends Migration
      */
     public function up()
     {
-        Module::generate("Departments", 'departments', 'name', 'fa-tags', [
-            ["name", "Name", "Name", true, "", 1, 250, true],
-            ["tags", "Tags", "Taginput", false, [], 0, 0, false],
-            ["color", "Color", "String", false, "", 0, 50, true],
+        Module::generate("Jugadors", 'jugadors', 'desnombre', 'fa-users', [
             ["id_app_equipo", "Equipo", "Dropdown", false, "", 0, 0, false, "@equipos"],
+            ["desnombre", "Nombre", "String", false, "", 0, 256, true],
+            ["desapellidopaterno", "Apellido Paterno", "String", false, "", 0, 256, false],
+            ["desapellidomaterno", "Apellido Materno", "String", false, "", 0, 256, false],
+            ["desalias", "Alias", "String", false, "", 0, 256, false],
+            ["imgfoto", "Foto", "Image", false, "", 0, 0, false],
+            ["valposicion", "Posicion", "Integer", false, "", 0, 11, true],
+            ["desheight", "Altura (cm)", "Float", false, "", 0, 11, false],
+            ["desweight", "Peso ( Kg)", "Float", false, "", 0, 11, false],
+            ["fecnacimiento", "Fecha de nacimiento", "Datetime", false, "", 0, 0, false],
+            ["valpais", "Pais", "Integer", false, "", 0, 11, false],
         ]);
 		
 		/*
@@ -67,8 +74,8 @@ class CreateDepartmentsTable extends Migration
      */
     public function down()
     {
-        if (Schema::hasTable('departments')) {
-            Schema::drop('departments');
+        if (Schema::hasTable('jugadors')) {
+            Schema::drop('jugadors');
         }
     }
 }

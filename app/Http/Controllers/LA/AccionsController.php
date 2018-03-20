@@ -17,37 +17,37 @@ use Collective\Html\FormFacade as Form;
 use Dwij\Laraadmin\Models\Module;
 use Dwij\Laraadmin\Models\ModuleFields;
 
-use App\Models\Department;
+use App\Models\Accion;
 
-class DepartmentsController extends Controller
+class AccionsController extends Controller
 {
 	public $show_action = true;
-	public $view_col = 'name';
-	public $listing_cols = ['id', 'name', 'tags', 'color', 'id_app_equipo'];
+	public $view_col = 'desnombre';
+	public $listing_cols = ['id', 'desnombre', 'destemplate', 'isactive'];
 	
 	public function __construct() {
 		// Field Access of Listing Columns
 		if(\Dwij\Laraadmin\Helpers\LAHelper::laravel_ver() == 5.3) {
 			$this->middleware(function ($request, $next) {
-				$this->listing_cols = ModuleFields::listingColumnAccessScan('Departments', $this->listing_cols);
+				$this->listing_cols = ModuleFields::listingColumnAccessScan('Accions', $this->listing_cols);
 				return $next($request);
 			});
 		} else {
-			$this->listing_cols = ModuleFields::listingColumnAccessScan('Departments', $this->listing_cols);
+			$this->listing_cols = ModuleFields::listingColumnAccessScan('Accions', $this->listing_cols);
 		}
 	}
 	
 	/**
-	 * Display a listing of the Departments.
+	 * Display a listing of the Accions.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index()
 	{
-		$module = Module::get('Departments');
+		$module = Module::get('Accions');
 		
 		if(Module::hasAccess($module->id)) {
-			return View('la.departments.index', [
+			return View('la.accions.index', [
 				'show_actions' => $this->show_action,
 				'listing_cols' => $this->listing_cols,
 				'module' => $module
@@ -58,7 +58,7 @@ class DepartmentsController extends Controller
 	}
 
 	/**
-	 * Show the form for creating a new department.
+	 * Show the form for creating a new accion.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
@@ -68,16 +68,16 @@ class DepartmentsController extends Controller
 	}
 
 	/**
-	 * Store a newly created department in database.
+	 * Store a newly created accion in database.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
 	 */
 	public function store(Request $request)
 	{
-		if(Module::hasAccess("Departments", "create")) {
+		if(Module::hasAccess("Accions", "create")) {
 		
-			$rules = Module::validateRules("Departments", $request);
+			$rules = Module::validateRules("Accions", $request);
 			
 			$validator = Validator::make($request->all(), $rules);
 			
@@ -85,9 +85,9 @@ class DepartmentsController extends Controller
 				return redirect()->back()->withErrors($validator)->withInput();
 			}
 			
-			$insert_id = Module::insert("Departments", $request);
+			$insert_id = Module::insert("Accions", $request);
 			
-			return redirect()->route(config('laraadmin.adminRoute') . '.departments.index');
+			return redirect()->route(config('laraadmin.adminRoute') . '.accions.index');
 			
 		} else {
 			return redirect(config('laraadmin.adminRoute')."/");
@@ -95,30 +95,30 @@ class DepartmentsController extends Controller
 	}
 
 	/**
-	 * Display the specified department.
+	 * Display the specified accion.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
 	public function show($id)
 	{
-		if(Module::hasAccess("Departments", "view")) {
+		if(Module::hasAccess("Accions", "view")) {
 			
-			$department = Department::find($id);
-			if(isset($department->id)) {
-				$module = Module::get('Departments');
-				$module->row = $department;
+			$accion = Accion::find($id);
+			if(isset($accion->id)) {
+				$module = Module::get('Accions');
+				$module->row = $accion;
 				
-				return view('la.departments.show', [
+				return view('la.accions.show', [
 					'module' => $module,
 					'view_col' => $this->view_col,
 					'no_header' => true,
 					'no_padding' => "no-padding"
-				])->with('department', $department);
+				])->with('accion', $accion);
 			} else {
 				return view('errors.404', [
 					'record_id' => $id,
-					'record_name' => ucfirst("department"),
+					'record_name' => ucfirst("accion"),
 				]);
 			}
 		} else {
@@ -127,28 +127,28 @@ class DepartmentsController extends Controller
 	}
 
 	/**
-	 * Show the form for editing the specified department.
+	 * Show the form for editing the specified accion.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
 	public function edit($id)
 	{
-		if(Module::hasAccess("Departments", "edit")) {			
-			$department = Department::find($id);
-			if(isset($department->id)) {	
-				$module = Module::get('Departments');
+		if(Module::hasAccess("Accions", "edit")) {			
+			$accion = Accion::find($id);
+			if(isset($accion->id)) {	
+				$module = Module::get('Accions');
 				
-				$module->row = $department;
+				$module->row = $accion;
 				
-				return view('la.departments.edit', [
+				return view('la.accions.edit', [
 					'module' => $module,
 					'view_col' => $this->view_col,
-				])->with('department', $department);
+				])->with('accion', $accion);
 			} else {
 				return view('errors.404', [
 					'record_id' => $id,
-					'record_name' => ucfirst("department"),
+					'record_name' => ucfirst("accion"),
 				]);
 			}
 		} else {
@@ -157,7 +157,7 @@ class DepartmentsController extends Controller
 	}
 
 	/**
-	 * Update the specified department in storage.
+	 * Update the specified accion in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @param  int  $id
@@ -165,9 +165,9 @@ class DepartmentsController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
-		if(Module::hasAccess("Departments", "edit")) {
+		if(Module::hasAccess("Accions", "edit")) {
 			
-			$rules = Module::validateRules("Departments", $request, true);
+			$rules = Module::validateRules("Accions", $request, true);
 			
 			$validator = Validator::make($request->all(), $rules);
 			
@@ -175,9 +175,9 @@ class DepartmentsController extends Controller
 				return redirect()->back()->withErrors($validator)->withInput();;
 			}
 			
-			$insert_id = Module::updateRow("Departments", $request, $id);
+			$insert_id = Module::updateRow("Accions", $request, $id);
 			
-			return redirect()->route(config('laraadmin.adminRoute') . '.departments.index');
+			return redirect()->route(config('laraadmin.adminRoute') . '.accions.index');
 			
 		} else {
 			return redirect(config('laraadmin.adminRoute')."/");
@@ -185,18 +185,18 @@ class DepartmentsController extends Controller
 	}
 
 	/**
-	 * Remove the specified department from storage.
+	 * Remove the specified accion from storage.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
 	public function destroy($id)
 	{
-		if(Module::hasAccess("Departments", "delete")) {
-			Department::find($id)->delete();
+		if(Module::hasAccess("Accions", "delete")) {
+			Accion::find($id)->delete();
 			
 			// Redirecting to index() method
-			return redirect()->route(config('laraadmin.adminRoute') . '.departments.index');
+			return redirect()->route(config('laraadmin.adminRoute') . '.accions.index');
 		} else {
 			return redirect(config('laraadmin.adminRoute')."/");
 		}
@@ -209,11 +209,11 @@ class DepartmentsController extends Controller
 	 */
 	public function dtajax()
 	{
-		$values = DB::table('departments')->select($this->listing_cols)->whereNull('deleted_at');
+		$values = DB::table('accions')->select($this->listing_cols)->whereNull('deleted_at');
 		$out = Datatables::of($values)->make();
 		$data = $out->getData();
 
-		$fields_popup = ModuleFields::getModuleFields('Departments');
+		$fields_popup = ModuleFields::getModuleFields('Accions');
 		
 		for($i=0; $i < count($data->data); $i++) {
 			for ($j=0; $j < count($this->listing_cols); $j++) { 
@@ -222,7 +222,7 @@ class DepartmentsController extends Controller
 					$data->data[$i][$j] = ModuleFields::getFieldValue($fields_popup[$col], $data->data[$i][$j]);
 				}
 				if($col == $this->view_col) {
-					$data->data[$i][$j] = '<a href="'.url(config('laraadmin.adminRoute') . '/departments/'.$data->data[$i][0]).'">'.$data->data[$i][$j].'</a>';
+					$data->data[$i][$j] = '<a href="'.url(config('laraadmin.adminRoute') . '/accions/'.$data->data[$i][0]).'">'.$data->data[$i][$j].'</a>';
 				}
 				// else if($col == "author") {
 				//    $data->data[$i][$j];
@@ -231,12 +231,12 @@ class DepartmentsController extends Controller
 			
 			if($this->show_action) {
 				$output = '';
-				if(Module::hasAccess("Departments", "edit")) {
-					$output .= '<a href="'.url(config('laraadmin.adminRoute') . '/departments/'.$data->data[$i][0].'/edit').'" class="btn btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-edit"></i></a>';
+				if(Module::hasAccess("Accions", "edit")) {
+					$output .= '<a href="'.url(config('laraadmin.adminRoute') . '/accions/'.$data->data[$i][0].'/edit').'" class="btn btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-edit"></i></a>';
 				}
 				
-				if(Module::hasAccess("Departments", "delete")) {
-					$output .= Form::open(['route' => [config('laraadmin.adminRoute') . '.departments.destroy', $data->data[$i][0]], 'method' => 'delete', 'style'=>'display:inline']);
+				if(Module::hasAccess("Accions", "delete")) {
+					$output .= Form::open(['route' => [config('laraadmin.adminRoute') . '.accions.destroy', $data->data[$i][0]], 'method' => 'delete', 'style'=>'display:inline']);
 					$output .= ' <button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-times"></i></button>';
 					$output .= Form::close();
 				}

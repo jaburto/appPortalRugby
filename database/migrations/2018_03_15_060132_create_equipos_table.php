@@ -8,7 +8,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Dwij\Laraadmin\Models\Module;
 
-class CreateDepartmentsTable extends Migration
+class CreateEquiposTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,11 +17,18 @@ class CreateDepartmentsTable extends Migration
      */
     public function up()
     {
-        Module::generate("Departments", 'departments', 'name', 'fa-tags', [
-            ["name", "Name", "Name", true, "", 1, 250, true],
-            ["tags", "Tags", "Taginput", false, [], 0, 0, false],
-            ["color", "Color", "String", false, "", 0, 50, true],
-            ["id_app_equipo", "Equipo", "Dropdown", false, "", 0, 0, false, "@equipos"],
+        Module::generate("Equipos", 'equipos', 'desnombre', 'fa-cube', [
+            ["desnombre", "Nombre", "String", false, "", 0, 256, true],
+            ["isactive", "Activo / Inactivo", "Checkbox", false, "1", 0, 0, false],
+            ["desnombrefemenino", "Nombre  Femenino", "String", false, "", 0, 256, false],
+            ["desnombrecomercial", "Nombre Comercial", "String", false, "", 0, 256, false],
+            ["imglogo", "Logo", "Image", false, "", 0, 0, false],
+            ["imgbanner", "Banner", "Image", false, "", 0, 0, false],
+            ["desentrenamiento", "Lugar Entrenamiento", "String", false, "", 0, 256, false],
+            ["deshorario", "Horario", "String", false, "", 0, 256, false],
+            ["descontacto", "Contacto", "String", false, "", 0, 256, false],
+            ["deswebsite", "Web Site", "String", false, "", 0, 256, false],
+            ["desfacebook", "Facebook", "String", false, "", 0, 256, false],
         ]);
 		
 		/*
@@ -67,8 +74,8 @@ class CreateDepartmentsTable extends Migration
      */
     public function down()
     {
-        if (Schema::hasTable('departments')) {
-            Schema::drop('departments');
+        if (Schema::hasTable('equipos')) {
+            Schema::drop('equipos');
         }
     }
 }

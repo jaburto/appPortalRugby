@@ -1,7 +1,7 @@
 @extends('la.layouts.app')
 
 @section('htmlheader_title')
-	Department View
+	Equipo View
 @endsection
 
 
@@ -15,7 +15,7 @@
 					<div class="profile-icon text-primary"><i class="fa {{ $module->fa_icon }}"></i></div>
 				</div>
 				<div class="col-md-9">
-					<h4 class="name">{{ $department->$view_col }}</h4>
+					<h4 class="name">{{ $equipo->$view_col }}</h4>
 					<div class="row stats">
 						<div class="col-md-4"><i class="fa fa-facebook"></i> 234</div>
 						<div class="col-md-4"><i class="fa fa-twitter"></i> 12</div>
@@ -81,12 +81,12 @@
 			</div>
 		</div>
 		<div class="col-md-1 actions">
-			@la_access("Departments", "edit")
-				<a href="{{ url(config('laraadmin.adminRoute') . '/departments/'.$department->id.'/edit') }}" class="btn btn-xs btn-edit btn-default"><i class="fa fa-pencil"></i></a><br>
+			@la_access("Equipos", "edit")
+				<a href="{{ url(config('laraadmin.adminRoute') . '/equipos/'.$equipo->id.'/edit') }}" class="btn btn-xs btn-edit btn-default"><i class="fa fa-pencil"></i></a><br>
 			@endla_access
-			
-			@la_access("Departments", "delete")
-				{{ Form::open(['route' => [config('laraadmin.adminRoute') . '.departments.destroy', $department->id], 'method' => 'delete', 'style'=>'display:inline']) }}
+
+			@la_access("Equipos", "delete")
+				{{ Form::open(['route' => [config('laraadmin.adminRoute') . '.equipos.destroy', $equipo->id], 'method' => 'delete', 'style'=>'display:inline']) }}
 					<button class="btn btn-default btn-delete btn-xs" type="submit"><i class="fa fa-times"></i></button>
 				{{ Form::close() }}
 			@endla_access
@@ -94,7 +94,7 @@
 	</div>
 
 	<ul data-toggle="ajax-tab" class="nav nav-tabs profile" role="tablist">
-		<li class=""><a href="{{ url(config('laraadmin.adminRoute') . '/departments') }}" data-toggle="tooltip" data-placement="right" title="Back to Departments"><i class="fa fa-chevron-left"></i></a></li>
+		<li class=""><a href="{{ url(config('laraadmin.adminRoute') . '/equipos') }}" data-toggle="tooltip" data-placement="right" title="Back to Equipos"><i class="fa fa-chevron-left"></i></a></li>
 		<li class="active"><a role="tab" data-toggle="tab" class="active" href="#tab-general-info" data-target="#tab-info"><i class="fa fa-bars"></i> General Info</a></li>
 		<li class=""><a role="tab" data-toggle="tab" href="#tab-timeline" data-target="#tab-timeline"><i class="fa fa-clock-o"></i> Timeline</a></li>
 	</ul>
@@ -107,10 +107,17 @@
 						<h4>General Info</h4>
 					</div>
 					<div class="panel-body">
-						@la_display($module, 'name')
-						@la_display($module, 'tags')
-						@la_display($module, 'color')
-						@la_display($module, 'id_app_equipo')
+						@la_display($module, 'desnombre')
+						@la_display($module, 'desnombrefemenino')
+						@la_display($module, 'desnombrecomercial')
+						@la_display($module, 'imglogo')
+						@la_display($module, 'imgbanner')
+						@la_display($module, 'desentrenamiento')
+						@la_display($module, 'deshorario')
+						@la_display($module, 'descontacto')
+						@la_display($module, 'deswebsite')
+						@la_display($module, 'desfacebook')
+						@la_display($module, 'isactive')
 					</div>
 				</div>
 			</div>
@@ -209,7 +216,7 @@
 			</ul>
 			<!--<div class="text-center p30"><i class="fa fa-list-alt" style="font-size: 100px;"></i> <br> No posts to show</div>-->
 		</div>
-		
+
 	</div>
 	</div>
 	</div>

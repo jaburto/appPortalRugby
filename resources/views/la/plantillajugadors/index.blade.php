@@ -1,14 +1,14 @@
 @extends("la.layouts.app")
 
-@section("contentheader_title", "Departments")
-@section("contentheader_description", "Departments listing")
-@section("section", "Departments")
+@section("contentheader_title", "Jugadores")
+@section("contentheader_description", "PlantillaJugadors listing")
+@section("section", "PlantillaJugadors")
 @section("sub_section", "Listing")
-@section("htmlheader_title", "Departments Listing")
+@section("htmlheader_title", "PlantillaJugadors Listing")
 
 @section("headerElems")
-@la_access("Departments", "create")
-	<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Add Department</button>
+@la_access("PlantillaJugadors", "create")
+	<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Add Jugaddores</button>
 @endla_access
 @endsection
 
@@ -39,31 +39,38 @@
 		</tr>
 		</thead>
 		<tbody>
-			
+
 		</tbody>
 		</table>
 	</div>
 </div>
 
-@la_access("Departments", "create")
+@la_access("PlantillaJugadors", "create")
 <div class="modal fade" id="AddModal" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Add Department</h4>
+				<h4 class="modal-title" id="myModalLabel">Add Jugadores</h4>
 			</div>
-			{!! Form::open(['action' => 'LA\DepartmentsController@store', 'id' => 'department-add-form']) !!}
+			{!! Form::open(['action' => 'LA\PlantillaJugadorsController@store', 'id' => 'plantillajugador-add-form']) !!}
 			<div class="modal-body">
 				<div class="box-body">
-                    @la_form($module)
-					
-					{{--
-					@la_input($module, 'name')
-					@la_input($module, 'tags')
-					@la_input($module, 'color')
-					@la_input($module, 'id_app_equipo')
-					--}}
+                  {{--  @la_form($module) --}}
+
+
+				  @la_input($module, 'id_app_plantilla',$id_app_plantilla)
+					{{-- @la_input($module, 'id_app_jugador') --}}
+
+					<label class="col-sm-2 control-label">Multiselect</label>
+	        <div class="col-sm-10">
+
+						<select id="example-post" name="multiselect[]" multiple="multiple">
+							@foreach ($lstjugadores as $j)
+								<option value="{{ $j->id }}"> {{ $j->desnombre }}  {{ $j->desapellidopaterno }}  {{ $j->desapellidomaterno }}</option>
+							@endforeach
+						</select>
+					</div>
 				</div>
 			</div>
 			<div class="modal-footer">
@@ -80,16 +87,18 @@
 
 @push('styles')
 <link rel="stylesheet" type="text/css" href="{{ asset('la-assets/plugins/datatables/datatables.min.css') }}"/>
+<link rel="stylesheet" type="text/css" href="{{ asset('la-assets/plugins/multiselect/bootstrap-multiselect.css') }}"/>
 @endpush
 
 @push('scripts')
 <script src="{{ asset('la-assets/plugins/datatables/datatables.min.js') }}"></script>
+<script src="{{ asset('la-assets/plugins/multiselect/bootstrap-multiselect.js') }}"></script>
 <script>
 $(function () {
 	$("#example1").DataTable({
 		processing: true,
         serverSide: true,
-        ajax: "{{ url(config('laraadmin.adminRoute') . '/department_dt_ajax') }}",
+        ajax: "{{ url(config('laraadmin.adminRoute') . '/plantillajugador_dt_ajax?c='.$id_app_plantilla.'') }}",
 		language: {
 			lengthMenu: "_MENU_",
 			search: "_INPUT_",
@@ -99,9 +108,17 @@ $(function () {
 		columnDefs: [ { orderable: false, targets: [-1] }],
 		@endif
 	});
-	$("#department-add-form").validate({
-		
+	$("#plantillajugador-add-form").validate({
+
 	});
+});
+$(document).ready(function() {
+
+		$('#example-post').multiselect({
+				includeSelectAllOption: false,
+				enableFiltering: true,
+				buttonWidth: '400px'
+		});
 });
 </script>
 @endpush

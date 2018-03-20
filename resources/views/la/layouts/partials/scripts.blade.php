@@ -17,7 +17,16 @@
 <script src="{{ asset('la-assets/plugins/stickytabs/jquery.stickytabs.js') }}" type="text/javascript"></script>
 <script src="{{ asset('la-assets/plugins/slimScroll/jquery.slimscroll.min.js') }}" type="text/javascript"></script>
 
+<script>
+function ConfirmDelete(){
 
+	var x = confirm("Are you sure you want to delete?");
+  if (x)
+    return true;
+  else
+    return false;
+}
+</script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
       Both of these plugins are recommended to enhance the

@@ -1,14 +1,14 @@
 @extends("la.layouts.app")
 
-@section("contentheader_title", "Departments")
-@section("contentheader_description", "Departments listing")
-@section("section", "Departments")
+@section("contentheader_title", "Accions")
+@section("contentheader_description", "Accions listing")
+@section("section", "Accions")
 @section("sub_section", "Listing")
-@section("htmlheader_title", "Departments Listing")
+@section("htmlheader_title", "Accions Listing")
 
 @section("headerElems")
-@la_access("Departments", "create")
-	<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Add Department</button>
+@la_access("Accions", "create")
+	<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Add Accion</button>
 @endla_access
 @endsection
 
@@ -45,24 +45,23 @@
 	</div>
 </div>
 
-@la_access("Departments", "create")
+@la_access("Accions", "create")
 <div class="modal fade" id="AddModal" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Add Department</h4>
+				<h4 class="modal-title" id="myModalLabel">Add Accion</h4>
 			</div>
-			{!! Form::open(['action' => 'LA\DepartmentsController@store', 'id' => 'department-add-form']) !!}
+			{!! Form::open(['action' => 'LA\AccionsController@store', 'id' => 'accion-add-form']) !!}
 			<div class="modal-body">
 				<div class="box-body">
                     @la_form($module)
 					
 					{{--
-					@la_input($module, 'name')
-					@la_input($module, 'tags')
-					@la_input($module, 'color')
-					@la_input($module, 'id_app_equipo')
+					@la_input($module, 'desnombre')
+					@la_input($module, 'destemplate')
+					@la_input($module, 'isactive')
 					--}}
 				</div>
 			</div>
@@ -89,7 +88,7 @@ $(function () {
 	$("#example1").DataTable({
 		processing: true,
         serverSide: true,
-        ajax: "{{ url(config('laraadmin.adminRoute') . '/department_dt_ajax') }}",
+        ajax: "{{ url(config('laraadmin.adminRoute') . '/accion_dt_ajax') }}",
 		language: {
 			lengthMenu: "_MENU_",
 			search: "_INPUT_",
@@ -99,7 +98,7 @@ $(function () {
 		columnDefs: [ { orderable: false, targets: [-1] }],
 		@endif
 	});
-	$("#department-add-form").validate({
+	$("#accion-add-form").validate({
 		
 	});
 });

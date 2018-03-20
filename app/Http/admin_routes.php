@@ -96,4 +96,12 @@ Route::group(['as' => $as, 'middleware' => ['auth', 'permission:ADMIN_PANEL']], 
 	/* ================== Catalogo_Detalles ================== */
 	Route::resource(config('laraadmin.adminRoute') . '/catalogo_detalles', 'LA\Catalogo_DetallesController');
 	Route::get(config('laraadmin.adminRoute') . '/catalogo_detalle_dt_ajax', 'LA\Catalogo_DetallesController@dtajax');
+
+	/* ================== Plantillas ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/plantillas', 'LA\PlantillasController');
+	Route::get(config('laraadmin.adminRoute') . '/plantilla_dt_ajax', 'LA\PlantillasController@dtajax');
+
+	/* ================== PlantillaJugadors ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/plantillajugadors', 'LA\PlantillaJugadorsController');
+	Route::get(config('laraadmin.adminRoute') . '/plantillajugador_dt_ajax', 'LA\PlantillaJugadorsController@dtajax');
 });

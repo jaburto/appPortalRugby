@@ -1,14 +1,14 @@
 @extends("la.layouts.app")
 
-@section("contentheader_title", "Departments")
-@section("contentheader_description", "Departments listing")
-@section("section", "Departments")
+@section("contentheader_title", "Jugadors")
+@section("contentheader_description", "Jugadors listing")
+@section("section", "Jugadors")
 @section("sub_section", "Listing")
-@section("htmlheader_title", "Departments Listing")
+@section("htmlheader_title", "Jugadors Listing")
 
 @section("headerElems")
-@la_access("Departments", "create")
-	<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Add Department</button>
+@la_access("Jugadors", "create")
+	<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Add Jugador</button>
 @endla_access
 @endsection
 
@@ -45,24 +45,31 @@
 	</div>
 </div>
 
-@la_access("Departments", "create")
+@la_access("Jugadors", "create")
 <div class="modal fade" id="AddModal" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Add Department</h4>
+				<h4 class="modal-title" id="myModalLabel">Add Jugador</h4>
 			</div>
-			{!! Form::open(['action' => 'LA\DepartmentsController@store', 'id' => 'department-add-form']) !!}
+			{!! Form::open(['action' => 'LA\JugadorsController@store', 'id' => 'jugador-add-form']) !!}
 			<div class="modal-body">
 				<div class="box-body">
                     @la_form($module)
 					
 					{{--
-					@la_input($module, 'name')
-					@la_input($module, 'tags')
-					@la_input($module, 'color')
 					@la_input($module, 'id_app_equipo')
+					@la_input($module, 'desnombre')
+					@la_input($module, 'desapellidopaterno')
+					@la_input($module, 'desapellidomaterno')
+					@la_input($module, 'desalias')
+					@la_input($module, 'imgfoto')
+					@la_input($module, 'valposicion')
+					@la_input($module, 'desheight')
+					@la_input($module, 'desweight')
+					@la_input($module, 'fecnacimiento')
+					@la_input($module, 'valpais')
 					--}}
 				</div>
 			</div>
@@ -89,7 +96,7 @@ $(function () {
 	$("#example1").DataTable({
 		processing: true,
         serverSide: true,
-        ajax: "{{ url(config('laraadmin.adminRoute') . '/department_dt_ajax') }}",
+        ajax: "{{ url(config('laraadmin.adminRoute') . '/jugador_dt_ajax') }}",
 		language: {
 			lengthMenu: "_MENU_",
 			search: "_INPUT_",
@@ -99,7 +106,7 @@ $(function () {
 		columnDefs: [ { orderable: false, targets: [-1] }],
 		@endif
 	});
-	$("#department-add-form").validate({
+	$("#jugador-add-form").validate({
 		
 	});
 });
